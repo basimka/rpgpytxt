@@ -14,4 +14,4 @@ knife = Weapon('Нож',20,10)
 sword = Weapon('Меч',25,15)
 staff = Weapon('Посох',15,15)
 
-spisok = [woodstick, clows, knife, sword, staff]
+spisok_weapon = [woodstick, clows, knife, sword, staff]

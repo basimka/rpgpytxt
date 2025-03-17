@@ -1,7 +1,5 @@
 # Для начала импортируем рандомайзер
 from random import randint
-import spisok_spells
-import spisok_weapons
 print('Start Game')
 
 # Создадим класс игрока 
@@ -18,8 +16,54 @@ class Enemy:
     mana = 0
 
 
+### Меню статистика
+def menu_stats():
+    print('Статистика игрок')
+    print('****************')
+    print (f'hp = {p.hp}')
+    print (f'damage = {p.damage}')
+    print (f'mana = {p.mana}')
+    input("Нажмите Enter для продолжения.")
+
+# Список заклинаний
+
+class Spells:
+    def __init__(self,name,power,mana):
+        self.name = name
+        self.damage = power
+        self.mana = mana
+
+    def __str__(self):
+        return str(self.name)
+    
+fireball = Spells('Огненный шар',10,10)
+lighting = Spells('молния',10,10)
+heal = Spells('Лечение',10,10)
+    
+spisok_magic = [fireball, lighting, heal]
+
+#Класс оружия:
+class Weapon:
+    def __init__(self,name,damage,stability):
+        self.name = name
+        self.damage = damage
+        self.stability = stability
+
+    def __str__(self):
+        return str(self.name)
+    
+woodstick = Weapon('Палка',10,5)
+clows = Weapon('Когти',20,20)
+knife = Weapon('Нож',20,10)
+sword = Weapon('Меч',25,15)
+staff = Weapon('Посох',15,15)
+
+spisok_weapon = [woodstick, clows, knife, sword, staff]
+
+#Инциализация классов
 p = Player()
 e = Enemy()
+
 
 #Для более простого использования обозвали классы Игрока и Противника #буквами p и e.
 #Теперь нам надо запилить основное меню которое и будет запускаться при #старте
@@ -34,7 +78,7 @@ def menu(p):
             if n == '1':
                 menu_fight(p)
             if n == '2':
-                menu_stats(p)
+                menu_stats()
             if n == '3':
                 menu_help(p)
             if n == '4':
@@ -87,13 +131,13 @@ def menu_fight(p):
             print("Вы победили")
 
         print("******************")
-### Меню статистика
-def menu_stats(p):
-    print('Статистика игрок')
-    print('****************')
-    print ('hp = ', p.hp)
-    print ('damage = ', p.damage)
-    input("Нажмите Enter для продолжения.")
+# ### Меню статистика
+# def menu_stats(p):
+#     print('Статистика игрок')
+#     print('****************')
+#     print ('hp = ', p.hp)
+#     print ('damage = ', p.damage)
+#     input("Нажмите Enter для продолжения.")
 #Пока не придумал что писать в помощи
 # Меню помощи
 def menu_help(p):
