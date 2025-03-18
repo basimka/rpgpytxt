@@ -2,9 +2,8 @@
 from random import randint
 print('Start Game')
 ############################## Глобальные перемены ##############################
-global Game
-Game = True
-Fight = True
+
+
 ############################## КЛАССЫ ##############################
 # Создадим класс игрока 
 class Player:
@@ -23,7 +22,6 @@ class Enemy:
 
 
 # Список заклинаний
-
 class Spells:
     def __init__(self,name,power,mana):
         self.name = name
@@ -84,14 +82,18 @@ def menu_prefight():
 (4) Выход из игры
 ''')
     
-def Proverka_death():
+def Proverka_death(Game):
     if p.hp < 0:
         print("Вы проиграли")
         Game = False
-            
-    if e.hp < 0:
+        return Game
+    elif e.hp < 0:
         print("Вы победили")
         Game = False
+        return Game
+        
+    else:
+        pass
     
 def menu_txt_fight():
     print(f'''
@@ -107,17 +109,17 @@ def menu_txt_fight():
 ''')
 
 ############################## ИГРА ##############################
-def menu(p):
+def menu():
     while True:
         menu_prefight()
         try:
             n=input('Введите число: ')
             if n == '1':
-                menu_fight(p)
+                menu_fight()
             if n == '2':
                 menu_stats()
             if n == '3':
-                menu_help(p)
+                menu_help()
             if n == '4':
                 quit()
             else:
@@ -127,40 +129,49 @@ def menu(p):
         except SyntaxError:
             print('Введите число')
 
-### Меню Битвы
-def menu_fight(p):
-    while Game == True:
-        print (Game)
-        Proverka_death()
-        menu_txt_fight()
-        n = input("Введите число: ")
-        if n == '1':
-            # Здоровье врага отнимает от вашего дамага.
-            e.hp -= p.damage
-            print('Вы ударили противника, у него осталось', e.hp)
-            # Здоровье игрока отнимает от дамага врага.
-            p.hp -= e.damage
-            print('Противник ударил вас, у вас осталось',p.hp)
+def proverkaUdar(n):
+    if n == '1':
+        # Здоровье врага отнимает от вашего дамага.
+        e.hp -= p.damage
+        print('Вы ударили противника, у него осталось', e.hp)
+        # Здоровье игрока отнимает от дамага врага.
+        p.hp -= e.damage
+        print('Противник ударил вас, у вас осталось',p.hp)
 
-            print("*********************")
-
-        elif n == '2':
-            # Рандомно от 0 до 5 добавляет хп.
-            p.hp += randint(0,5)
-            # Если здоровье игрока больше, то хп игрока будет равна 100.
-            if p.hp > 100:
-                p.hp = 100
+        print("*********************")
+        
+    elif n == '2':
+        # Рандомно от 0 до 5 добавляет хп.
+        p.hp += randint(0,5)
+        # Если здоровье игрока больше, то хп игрока будет равна 100.
+        if p.hp > 100:
+            p.hp = 100
 
             #print('Ваши хп',p.hp)
 
-        else:
-             print("Чего ждем?")
-        
-            
+    else:
+        print("Чего ждем?")
 
-        print("******************")
+
+
+### Меню Битвы
+def menu_fight():
+    if e.hp < 0:
+        return
+    if p.hp < 0:
+        return
+    Game = True
+    while Game == True:
+        
+        menu_txt_fight()
+        n = input("Введите число: ")
+        proverkaUdar(n)
+        Proverka_death(Game)
+        n1 = Proverka_death(Game)
+        if (n1 == False):
+            Game = False
 # Меню помощи
-def menu_help(p):
+def menu_help():
     print('####################################')
     print('Помочь ты сможешь только себе сам!!!')
     print('####################################')
@@ -169,7 +180,8 @@ def enemyEnable():
     pass
 #Ну и собственно запускаем игру
 ###Запустить игру
-menu(p)
+while True:
+    menu()
 
 #10.03.2025 - Пока работает выход из игры и просмотр статистики.
-#10.03.2025 - Теперь можно драться и хилится
+#10.03.2025 - Теперь можно драться и хилиться
