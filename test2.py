@@ -1,59 +1,99 @@
-Game = True
-def menu_txt_fight():
-    pass
+# Для начала импортируем рандомайзер
+from random import randint
+print('Start Game')
+############################## Глобальные перемены #################
 
-class Evil:
-    hp = 10
-    damage = 10
-
+############################## КЛАССЫ ##############################
 class Player:
-    hp = 100
-    damage = 100
-e = Evil()
-p = Player()
-
-def Proverka_death():
-    if p.hp < 0:
-        print("Вы проиграли")
-        Game = False
-        return Game
-            
-    elif e.hp < 0:
-        print("Вы победили")
-        Game = False
-        return Game
-    else:
+    def __init__(self,hp,damage,mana):
+        self.hp = hp
+        self.damage = damage
+        self.mana = mana
+    def __str__(self):
         pass
 
-def menu_fight():
-    while Game == True:
-        Game = True
+p = Player(100,10,0)
+class Enemy:
+    def __init__(self,hp,damage,mana):
+        self.hp = hp
+        self.damage = damage
+        self.mana = mana
+    def __str__(self):
+        pass
+
+e = Enemy(80,10,0)
+
+class Room:
+    def __init__(self, opisanie, exits):
+        self.opisanie = opisanie
+        self.exits = exits
         
-        menu_txt_fight()
-        n = input("Введите число: ")
+        pass
+    def __str__(self):
+        pass
+
+############################## Местность ###########################
+def do_look():
+    print('''
+Ни чего не видно. Хоть глаз выколи.
+''')
+############################## Инвентарь ###########################
+def menu_inventory():
+    pass
+
+############################## Меню ################################
+### Меню статистика
+def menu_stats():
+    print('Статистика игрок')
+    print('****************')
+    print (f'hp = {p.hp}')
+    print (f'damage = {p.damage}')
+    print (f'mana = {p.mana}')
+    input("Нажмите Enter для продолжения.")
+
+### Меню Битва
+def menu_prefight():
+    print (f'''
+(1) Сражаться
+(2) Посмотреть статистику           
+(3) Вызвать меню помощи
+(4) Выход из игры
+''')
+### Основное меню
+def start_menu():
+    print (f'''
+(1) Осмотреться
+(2) Характеристики
+(3) Инвентарь           
+(4) Вызвать меню помощи
+(5) Выход из игры
+''')
+### Меню помощи
+def menu_help():
+    print('####################################')
+    print('Помочь ты сможешь только себе сам!!!')
+    print('####################################')
+############################## Игра ################################
+def Game():
+    start_menu()
+    try:
+        n=input('Введите число: ')
         if n == '1':
-            # Здоровье врага отнимает от вашего дамага.
-            e.hp -= p.damage
-            print('Вы ударили противника, у него осталось', e.hp)
-            # Здоровье игрока отнимает от дамага врага.
-            p.hp -= e.damage
-            print('Противник ударил вас, у вас осталось',p.hp)
-
-            print("*********************")
-            Proverka_death()
-        elif n == '2':
-            # Рандомно от 0 до 5 добавляет хп.
-            p.hp += randint(0,5)
-            # Если здоровье игрока больше, то хп игрока будет равна 100.
-            if p.hp > 100:
-                p.hp = 100
-
-            #print('Ваши хп',p.hp)
-
-        
-        
-            
-
-        print("******************")
-
-menu_fight()
+            do_look()
+        if n == '2':
+            menu_stats()
+        if n == '3':
+            menu_inventory()
+        if n == '4':
+            menu_help()
+        if n == '5':
+            quit()
+        else:
+            pass
+    except NameError:
+        print('Введите число: ')
+    except SyntaxError:
+        print('Введите число: ')
+### Основной цикл
+while True:
+    Game()
