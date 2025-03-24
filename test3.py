@@ -39,8 +39,8 @@ class Room1:
     def __str__(self):
         return str(self.name)
 
-r1 = Room1(2,0)
-print(r1)
+
+
 
 def opisanie():
     print('''
@@ -52,3 +52,8 @@ PЗдесь ни чего нет
 Выходы есть только:
 на{}
 ''')
+    
+
+
+r1 = Room()
+print(r1)
