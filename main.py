@@ -1,42 +1,8 @@
 # Для начала импортируем рандомайзер
 from random import randint
-print('Start Game')
-############################## Глобальные перемены ##############################
 
-############################## КЛАССЫ ##############################
-# Создадим класс игрока 
-class Player:
-    hp = 100
-    damage = 10
-    mana = 0
-    exp = 0
-    lvl = 0
+############################## Оружие ###########################
 
-# Класс противника
-class Enemy:
-    name = 'Enemy'
-    hp = randint(70,130)
-    damage = randint(6,14)
-    mana = 0
-
-
-# Список заклинаний
-class Spells:
-    def __init__(self,name,power,mana):
-        self.name = name
-        self.damage = power
-        self.mana = mana
-
-    def __str__(self):
-        return str(self.name)
-    
-fireball = Spells('Огненный шар',10,10)
-lighting = Spells('молния',10,10)
-heal = Spells('Лечение',10,10)
-    
-spisok_magic = [fireball, lighting, heal]
-
-#Класс оружия:
 class Weapon:
     def __init__(self,name,damage,stability):
         self.name = name
@@ -45,24 +11,155 @@ class Weapon:
 
     def __str__(self):
         return str(self.name)
-    
+
 woodstick = Weapon('Палка',10,5)
 clows = Weapon('Когти',20,20)
 knife = Weapon('Нож',20,10)
 sword = Weapon('Меч',25,15)
 staff = Weapon('Посох',15,15)
+##################################################################
+class Room:
+    name = 'Комната'
+    vihody = ['ю','з']
+    orujie = sword
+    vragy = []
+    opisanie =('\n\n' + '\
+###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}' + '\n\n')
+    
+class Room1:
+    name = 'Комната1'
+    vihody = ['в']
+    orujie = sword
+    vragy = []
+    opisanie =('\n\n' + '\
+###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}' + '\n\n')
 
-spisok_weapon = [woodstick, clows, knife, sword, staff]
+class Room2:
+    name = 'Комната2'
+    vihody = ['в','ю','']
+    orujie = sword
+    vragy = []
+    opisanie =('###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}')
 
-#Инциализация классов
-p = Player()
-e = Enemy()
+class Room3:
+    name = 'Комната3'
+    vihody = ['ю','з']
+    orujie = sword
+    vragy = []
+    opisanie =('\n\n' + '\
+###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}' + '\n\n')
 
-spisok_lvl_player = ['1000','2000','4000','8000','16000','32000','64000','128000','256000','512000']
-#Для более простого использования обозвали классы Игрока и Противника #буквами p и e.
-#Теперь нам надо запилить основное меню которое и будет запускаться при старте
+class Room4:
+    name = 'Комната4'
+    vihody = ['в','ю','с','з']
+    orujie = sword
+    vragy = []
+    opisanie =('###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}')
+    
+class Room5:
+    name = 'Комната5'
+    vihody = ['в','ю']
+    orujie = sword
+    vragy = []
+    opisanie =('###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}')
+    
+class Room6:
+    name = 'Комната6'
+    vihody = ['с','з']
+    orujie = sword
+    vragy = []
+    opisanie =('###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}')
+    
+class Room7:
+    name = 'Комната7'
+    vihody = ['в','з','с']
+    orujie = sword
+    vragy = []
+    opisanie =('###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}')
+    
+class Room8:
+    name = 'Комната8'
+    vihody = ['в','с']
+    orujie = sword
+    vragy = []
+    opisanie =('###################\n' + f'\
+Вы попали в {name}\n'+'\
+###################\n'+'\
+Здесь ни чего нет\n'+'\
+###################\n'+'\
+Выходы есть только:\n'+f'\
+{vihody}\n' + f'\
+Валяется {sword}')
+    
 
-############################## Меню ##############################
+
+def do_look():
+    print(maplocation.opisanie)
+############################## Инвентарь ###########################
+def menu_inventory():
+    print ('Ваши вещи = ' , inventar.things)
+    print ('Ваши свитки = ' , inventar.scrolls)
+    print ('Ваши бутылочки = ' , inventar.potions)
+    print ('Свобдных слотов =' , inventar.limit)
+    input("Нажмите Enter для продолжения.")
+
+############################## Меню ################################
 ### Меню статистика
 def menu_stats():
     print('Статистика игрок')
@@ -80,107 +177,92 @@ def menu_prefight():
 (3) Вызвать меню помощи
 (4) Выход из игры
 ''')
-    
-def Proverka_death(Game):
-    if p.hp < 0:
-        print("Вы проиграли")
-        Game = False
-        return Game
-    elif e.hp < 0:
-        print("Вы победили")
-        Game = False
-        return Game
-        
-    else:
-        pass
-    
-def menu_txt_fight():
-    print(f'''
-Вы hp: {p.hp}
-Вы damage:{p.damage}
-**********************
-Враг hp: {e.hp}
-Враг damage: {e.damage}
-**********************
-**********************
-1)Ударить
-2)Хил 0-5
+### Основное меню
+def start_menu():
+    print (f'''
+Введите и нажмите  Enter
+см (смотреть) - Осмотреться
+хр (характеристики) - Характеристики
+инв (инвентарь) - Инвентарь           
+? (Помощь) - Вызвать меню помощи
+выход (прочь) - Выход из игры
 ''')
-
-############################## ИГРА ##############################
-def menu():
-    while True:
-        menu_prefight()
-        try:
-            n=input('Введите число: ')
-            if n == '1':
-                menu_fight()
-            if n == '2':
-                menu_stats()
-            if n == '3':
-                menu_help()
-            if n == '4':
-                quit()
-            else:
-                print('Выбери себе')
-        except NameError:
-            print('Введите число')
-        except SyntaxError:
-            print('Введите число')
-
-def proverkaUdar(n):
-    if n == '1':
-        # Здоровье врага отнимает от вашего дамага.
-        e.hp -= p.damage
-        print('Вы ударили противника, у него осталось', e.hp)
-        # Здоровье игрока отнимает от дамага врага.
-        p.hp -= e.damage
-        print('Противник ударил вас, у вас осталось',p.hp)
-
-        print("*********************")
-        
-    elif n == '2':
-        # Рандомно от 0 до 5 добавляет хп.
-        p.hp += randint(0,5)
-        # Если здоровье игрока больше, то хп игрока будет равна 100.
-        if p.hp > 100:
-            p.hp = 100
-
-            #print('Ваши хп',p.hp)
-
-    else:
-        print("Чего ждем?")
-
-
-
-### Меню Битвы
-def menu_fight():
-    if e.hp < 0:
-        return
-    if p.hp < 0:
-        return
-    Game = True
-    while Game == True:
-        
-        menu_txt_fight()
-        n = input("Введите число: ")
-        proverkaUdar(n)
-        Proverka_death(Game)
-        n1 = Proverka_death(Game)
-        if (n1 == False):
-            Game = False
-# Меню помощи
+### Меню помощи
 def menu_help():
     print('####################################')
     print('Помочь ты сможешь только себе сам!!!')
     print('####################################')
 
-def enemyEnable():
-    pass
-#Ну и собственно запускаем игру
-###Запустить игру
-while True:
-    menu()
+### Основная игровая функция
+def deystvie(n):  
+    global x
+    global maplocation
+    if n == 'см':
+        do_look()
+    elif n == 'смотреть':
+        do_look()
+    elif n == 'хр':
+        menu_stats()
+    elif n == 'характеристики':
+        menu_stats()
+    elif n == 'инв':
+        menu_inventory()
+    elif n == 'инвентарь':
+        menu_inventory()
+    elif n == '?':
+        menu_help()
+    elif n == 'помощь':
+        menu_help()
+    elif n == 'выход':
+        quit()
+    elif n == 'прочь':
+        quit()
+    elif n == 'ю':
+        if maplocation.name == 'Комната':
+            print('Вы перешли на юг')
+            maplocation = Room3()
+        elif maplocation.name == 'Комната1':
+            print('Тут стена, идти не куда')
+        elif maplocation.name == 'Комната3':
+            print('Тут стена, идти не куда')
+    elif n == 'з':
+        if maplocation.name == 'Комната':
+            print('Вы перешли на запад')
+            maplocation = Room1()
+        elif maplocation.name == 'Комната1':
+            print('Тут стена, идти не куда')
+        elif maplocation.name == 'Комната3':
+            print('Тут стена, идти не куда')
+    elif n == 'в':
+        if maplocation.name == 'Комната':
+            print('Тут стена, идти не куда')
+        elif maplocation.name == 'Комната1':
+            print('Вы перешли на восток')
+            maplocation = Room()
+        elif maplocation.name == 'Комната3':
+            print('Тут стена, идти не куда')
+            
+    elif n == 'с':
+        if maplocation.name == 'Комната':
+            print('Тут стена, идти не куда')
+        elif maplocation.name == 'Комната1':
+            print('Тут стена, идти не куда')
+        elif maplocation.name == 'Комната3':
+            print('Вы перешли на юсевер')
+            maplocation = Room()
+             
+    else:
+        print ('Ни чего не произошло')
+        
+### Основной цикл
+start_menu()
 
-#10.03.2025 - Пока работает выход из игры и просмотр статистики.
-#10.03.2025 - Теперь можно драться и хилиться
+############################## Глобальные переменные ###########################
+global x
+x = 1
+global maplocation
+maplocation = Room()
+
+while True:
+    n=input('Введите что нибудь: ')
+    deystvie(n)
