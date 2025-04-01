@@ -1,6 +1,31 @@
 # Для начала импортируем рандомайзер
 from random import randint
 
+
+class Player:
+    inventar = []
+    def __init__(self,hp,damage,mana):
+        self.hp = hp
+        self.damage = damage
+        self.mana = mana
+    def __str__(self):
+        pass
+global p
+
+
+p = Player(100,10,0)
+class Enemy:
+    def __init__(self,hp,damage,mana):
+        self.hp = hp
+        self.damage = damage
+        self.mana = mana
+    def __str__(self):
+        pass
+
+e = Enemy(80,10,0)
+
+
+
 ############################## Оружие ###########################
 
 class Weapon:
@@ -30,8 +55,7 @@ class Room:
 Здесь ни чего нет\n'+'\
 ###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}' + '\n\n')
+{vihody}\n')
     
 class Room1:
     name = 'Комната1'
@@ -64,7 +88,7 @@ class Room2:
 
 class Room3:
     name = 'Комната3'
-    vihody = ['ю','з']
+    vihody = ['с',]
     orujie = sword
     vragy = []
     opisanie =('\n\n' + '\
@@ -146,13 +170,24 @@ class Room8:
 Выходы есть только:\n'+f'\
 {vihody}\n' + f'\
 Валяется {sword}')
-    
+
+class inventar():
+    golds = 0
+    things = []
+    potions = []
+    scrolls = []
+    limit = 10
+
+inv = inventar()    
 
 
 def do_look():
     print(maplocation.opisanie)
+    if maplocation.orujie != 0:
+        print (f'Валяется {maplocation.orujie}')
 ############################## Инвентарь ###########################
 def menu_inventory():
+    print ('Ваше золото = ' , inventar.golds)
     print ('Ваши вещи = ' , inventar.things)
     print ('Ваши свитки = ' , inventar.scrolls)
     print ('Ваши бутылочки = ' , inventar.potions)
@@ -186,6 +221,7 @@ def start_menu():
 инв (инвентарь) - Инвентарь           
 ? (Помощь) - Вызвать меню помощи
 выход (прочь) - Выход из игры
+взять - Поднять или взять что есть в комнате
 ''')
 ### Меню помощи
 def menu_help():
@@ -210,9 +246,9 @@ def deystvie(n):
     elif n == 'инвентарь':
         menu_inventory()
     elif n == '?':
-        menu_help()
+        start_menu()
     elif n == 'помощь':
-        menu_help()
+        start_menu()
     elif n == 'выход':
         quit()
     elif n == 'прочь':
@@ -248,9 +284,18 @@ def deystvie(n):
         elif maplocation.name == 'Комната1':
             print('Тут стена, идти не куда')
         elif maplocation.name == 'Комната3':
-            print('Вы перешли на юсевер')
+            print('Вы перешли на север')
             maplocation = Room()
-             
+    elif n == 'взять':
+        if maplocation.orujie != 0:
+            print ('\n Что вы хотите взять? \n')
+            print (maplocation.orujie)
+            vz = input('Введите название предмета: ')
+            if str(vz) == str(maplocation.orujie):
+                print (f'Вы взяли {maplocation.orujie}')
+                inventar.things.append(str(maplocation.orujie))
+                maplocation.orujie = 0
+
     else:
         print ('Ни чего не произошло')
         
@@ -264,5 +309,6 @@ global maplocation
 maplocation = Room()
 
 while True:
-    n=input('Введите что нибудь: ')
+    n = input('Введите что нибудь: ')
     deystvie(n)
+    
