@@ -15,14 +15,15 @@ global p
 
 p = Player(100,10,0)
 class Enemy:
-    def __init__(self,hp,damage,mana):
+    def __init__(self,name,hp,damage,mana):
         self.hp = hp
         self.damage = damage
         self.mana = mana
+        self.name = name
     def __str__(self):
-        pass
+        return str(self.name)
 
-e = Enemy(80,10,0)
+e = Enemy('мышь',80,10,0)
 
 
 
@@ -47,30 +48,25 @@ class Room:
     name = 'Комната'
     vihody = ['ю','з']
     orujie = sword
-    vragy = []
-    opisanie =('\n\n' + '\
+    vragy = e
+    opisanie =('\n' + '\
 ###################\n' + f'\
 Вы попали в {name}\n'+'\
 ###################\n'+'\
-Здесь ни чего нет\n'+'\
-###################\n'+'\
-Выходы есть только:\n'+f'\
+Выходы есть только:\n'+ f'\
 {vihody}\n')
     
 class Room1:
     name = 'Комната1'
     vihody = ['в']
-    orujie = sword
+    orujie = knife
     vragy = []
-    opisanie =('\n\n' + '\
+    opisanie =('\n' + '\
 ###################\n' + f'\
 Вы попали в {name}\n'+'\
 ###################\n'+'\
-Здесь ни чего нет\n'+'\
-###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}' + '\n\n')
+{vihody}\n')
 
 class Room2:
     name = 'Комната2'
@@ -83,23 +79,19 @@ class Room2:
 Здесь ни чего нет\n'+'\
 ###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}')
+{vihody}\n')
 
 class Room3:
     name = 'Комната3'
     vihody = ['с',]
-    orujie = sword
+    orujie = staff
     vragy = []
-    opisanie =('\n\n' + '\
+    opisanie =('\n' + '\
 ###################\n' + f'\
 Вы попали в {name}\n'+'\
 ###################\n'+'\
-Здесь ни чего нет\n'+'\
-###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}' + '\n\n')
+{vihody}\n')
 
 class Room4:
     name = 'Комната4'
@@ -112,8 +104,7 @@ class Room4:
 Здесь ни чего нет\n'+'\
 ###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}')
+{vihody}\n')
     
 class Room5:
     name = 'Комната5'
@@ -126,8 +117,7 @@ class Room5:
 Здесь ни чего нет\n'+'\
 ###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}')
+{vihody}\n')
     
 class Room6:
     name = 'Комната6'
@@ -140,8 +130,7 @@ class Room6:
 Здесь ни чего нет\n'+'\
 ###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}')
+{vihody}\n')
     
 class Room7:
     name = 'Комната7'
@@ -154,8 +143,7 @@ class Room7:
 Здесь ни чего нет\n'+'\
 ###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}')
+{vihody}\n')
     
 class Room8:
     name = 'Комната8'
@@ -168,8 +156,16 @@ class Room8:
 Здесь ни чего нет\n'+'\
 ###################\n'+'\
 Выходы есть только:\n'+f'\
-{vihody}\n' + f'\
-Валяется {sword}')
+{vihody}\n')
+
+r0 = Room()
+r1 = Room1()
+r2 = Room2()
+r3 = Room3()
+r4 = Room4()
+r5 = Room5()
+r6 = Room6()
+r7 = Room7()
 
 class inventar():
     golds = 0
@@ -185,6 +181,8 @@ def do_look():
     print(maplocation.opisanie)
     if maplocation.orujie != 0:
         print (f'Валяется {maplocation.orujie}')
+    if maplocation.vragy != 0:
+        print (f'В углу скалится {maplocation.vragy}')
 ############################## Инвентарь ###########################
 def menu_inventory():
     print ('Ваше золото = ' , inventar.golds)
@@ -222,6 +220,7 @@ def start_menu():
 ? (Помощь) - Вызвать меню помощи
 выход (прочь) - Выход из игры
 взять - Поднять или взять что есть в комнате
+надеть - Надеть что-то из инвентаря
 ''')
 ### Меню помощи
 def menu_help():
@@ -253,10 +252,14 @@ def deystvie(n):
         quit()
     elif n == 'прочь':
         quit()
+    elif n == 'надеть':
+        print ('Что вы хотите надеть:')
+        print (inv)
     elif n == 'ю':
         if maplocation.name == 'Комната':
             print('Вы перешли на юг')
-            maplocation = Room3()
+            
+            maplocation = r3
         elif maplocation.name == 'Комната1':
             print('Тут стена, идти не куда')
         elif maplocation.name == 'Комната3':
@@ -264,7 +267,7 @@ def deystvie(n):
     elif n == 'з':
         if maplocation.name == 'Комната':
             print('Вы перешли на запад')
-            maplocation = Room1()
+            maplocation = r1
         elif maplocation.name == 'Комната1':
             print('Тут стена, идти не куда')
         elif maplocation.name == 'Комната3':
@@ -274,7 +277,7 @@ def deystvie(n):
             print('Тут стена, идти не куда')
         elif maplocation.name == 'Комната1':
             print('Вы перешли на восток')
-            maplocation = Room()
+            maplocation = r0
         elif maplocation.name == 'Комната3':
             print('Тут стена, идти не куда')
             
@@ -285,7 +288,7 @@ def deystvie(n):
             print('Тут стена, идти не куда')
         elif maplocation.name == 'Комната3':
             print('Вы перешли на север')
-            maplocation = Room()
+            maplocation = r0
     elif n == 'взять':
         if maplocation.orujie != 0:
             print ('\n Что вы хотите взять? \n')
@@ -295,10 +298,14 @@ def deystvie(n):
                 print (f'Вы взяли {maplocation.orujie}')
                 inventar.things.append(str(maplocation.orujie))
                 maplocation.orujie = 0
+                
 
     else:
         print ('Ни чего не произошло')
-        
+
+
+def proverka_enimy():
+    pass
 ### Основной цикл
 start_menu()
 
@@ -306,9 +313,10 @@ start_menu()
 global x
 x = 1
 global maplocation
-maplocation = Room()
+maplocation = r0
 
 while True:
     n = input('Введите что нибудь: ')
     deystvie(n)
-    
+    do_look()
+    proverka_enimy()
