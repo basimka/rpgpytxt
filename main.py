@@ -60,7 +60,7 @@ class Room1:
     name = 'Комната1'
     vihody = ['в']
     orujie = knife
-    vragy = []
+    vragy = 0
     opisanie =('\n' + '\
 ###################\n' + f'\
 Вы попали в {name}\n'+'\
@@ -72,7 +72,7 @@ class Room2:
     name = 'Комната2'
     vihody = ['в','ю','']
     orujie = sword
-    vragy = []
+    vragy = 0
     opisanie =('###################\n' + f'\
 Вы попали в {name}\n'+'\
 ###################\n'+'\
@@ -85,7 +85,7 @@ class Room3:
     name = 'Комната3'
     vihody = ['с',]
     orujie = staff
-    vragy = []
+    vragy = 0
     opisanie =('\n' + '\
 ###################\n' + f'\
 Вы попали в {name}\n'+'\
@@ -221,6 +221,7 @@ def start_menu():
 выход (прочь) - Выход из игры
 взять - Поднять или взять что есть в комнате
 надеть - Надеть что-то из инвентаря
+напасть - Напасть на кого нибудь
 ''')
 ### Меню помощи
 def menu_help():
@@ -253,12 +254,20 @@ def deystvie(n):
     elif n == 'прочь':
         quit()
     elif n == 'надеть':
-        print ('Что вы хотите надеть:')
+        print ('Что вы хотите надеть?')
         print (inv)
+    elif n == 'напасть':
+        if maplocation.vragy != 0:
+            print ('На кого вы хотите напасть? \n')
+            print (maplocation.vragy)
+            fg = input('Введите название врага: ')
+            if str(fg) == str(maplocation.vragy):
+                print (f'Вы напали на {maplocation.vragy}')
+                #maplocation.orujie = 0
+                fight()
     elif n == 'ю':
         if maplocation.name == 'Комната':
             print('Вы перешли на юг')
-            
             maplocation = r3
         elif maplocation.name == 'Комната1':
             print('Тут стена, идти не куда')
@@ -299,13 +308,51 @@ def deystvie(n):
                 inventar.things.append(str(maplocation.orujie))
                 maplocation.orujie = 0
                 
-
     else:
         print ('Ни чего не произошло')
 
 
 def proverka_enimy():
     pass
+
+def fight():
+    while e.hp > 0:
+        # Также, как я и сказал по последовательности списка расставляет переменные.
+        print('Вы hp:',p.hp)
+        print('Вы damage: ',p.damage)
+        print("**********************")
+        print('Враг hp:',e.hp)
+        print('Враг damage: ',e.damage)
+        print("**********************")
+        print("**********************")
+        print("1)Ударить")
+        print("2)Хил 0-5")
+        n = input("Введите число: ")
+        if n == '1':
+            # Здоровье врага отнимает от вашего дамага.
+            e.hp -= p.damage
+            print('Вы ударили противника, у него осталось', e.hp)
+            # Здоровье игрока отнимает от дамага врага.
+            p.hp -= e.damage
+            print('Противник ударил вас, у вас осталось',p.hp)
+            print("*********************")
+            if p.hp < 0:
+                print("Вы проиграли")
+            elif e.hp < 0:
+                print("Вы победили")
+
+
+        elif n == '2':
+            # Рандомно от 0 до 5 добавляет хп.
+            p.hp += randint(0,5)
+            # Если здоровье игрока больше, то хп игрока будет равна 100.
+            if p.hp > 100:
+                p.hp = 100
+
+            #print('Ваши хп',p.hp)
+        else:
+             print("Чего ждем?")
+        print("******************")
 ### Основной цикл
 start_menu()
 
