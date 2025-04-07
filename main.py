@@ -4,22 +4,24 @@ from random import randint
 
 class Player:
     inventar = []
-    def __init__(self,hp,damage,mana):
+    def __init__(self,hp,damage,mana,haco):
         self.hp = hp
         self.damage = damage
         self.mana = mana
+        self.haco = haco
     def __str__(self):
         pass
 global p
 
 
-p = Player(100,10,0)
+p = Player(100,10,0,20)
 class Enemy:
-    def __init__(self,name,hp,damage,mana):
+    def __init__(self,name,hp,damage,mana,haco):
         self.hp = hp
         self.damage = damage
         self.mana = mana
         self.name = name
+        self.haco = haco
     def __str__(self):
         return str(self.name)
 
