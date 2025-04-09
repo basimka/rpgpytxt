@@ -262,7 +262,7 @@ def deystvie(n):
         quit()
     elif n == 'надеть':
         print ('Что вы хотите надеть?')
-        print (inv)
+        print (inv.things)
     elif n == 'напасть':
         if maplocation.vragy != 0:
             print ('На кого вы хотите напасть? \n')
@@ -370,7 +370,8 @@ global maplocation
 maplocation = r0
 
 while True:
+    print (maplocation.orujie)
     n = input('Введите что нибудь: ')
     deystvie(n)
-    #do_look()
+    do_look()
     proverka_enimy()
