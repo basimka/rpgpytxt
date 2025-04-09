@@ -25,7 +25,7 @@ class Enemy:
     def __str__(self):
         return str(self.name)
 
-e = Enemy('мышь',80,10,0)
+e = Enemy('мышь',80,10,0,20)
 
 
 
