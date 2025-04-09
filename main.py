@@ -370,8 +370,8 @@ global maplocation
 maplocation = r0
 
 while True:
-    print (maplocation.orujie)
+    #print (maplocation.orujie)
     n = input('Введите что нибудь: ')
     deystvie(n)
-    do_look()
+    #do_look()
     proverka_enimy()
