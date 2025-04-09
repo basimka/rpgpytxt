@@ -2,6 +2,8 @@
 from random import randint
 
 
+# Это класс Персонажа, так как версия игры сейчас однопользовательская
+# то экземпляр класса Игрока только один
 class Player:
     inventar = []
     def __init__(self,hp,damage,mana,haco):
@@ -11,8 +13,11 @@ class Player:
         self.haco = haco
     def __str__(self):
         pass
-global p
 
+#Так как экземпляр класса Игрока у нас должен быть доступен отовсюду,
+# то для начала мы делаем его глобальным, а потом уже создаем сам
+# экземпляр класса
+global p
 
 p = Player(100,10,0,20)
 class Enemy:
@@ -269,36 +274,36 @@ def deystvie(n):
                 fight()
     elif n == 'ю':
         if maplocation.name == 'Комната':
-            print('Вы перешли на юг')
+            print('\n Вы перешли на юг')
             maplocation = r3
         elif maplocation.name == 'Комната1':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
         elif maplocation.name == 'Комната3':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
     elif n == 'з':
         if maplocation.name == 'Комната':
-            print('Вы перешли на запад')
+            print('\n Вы перешли на запад')
             maplocation = r1
         elif maplocation.name == 'Комната1':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
         elif maplocation.name == 'Комната3':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
     elif n == 'в':
         if maplocation.name == 'Комната':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
         elif maplocation.name == 'Комната1':
-            print('Вы перешли на восток')
+            print('\n Вы перешли на восток')
             maplocation = r0
         elif maplocation.name == 'Комната3':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
             
     elif n == 'с':
         if maplocation.name == 'Комната':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
         elif maplocation.name == 'Комната1':
-            print('Тут стена, идти не куда')
+            print('\n Тут стена, идти не куда')
         elif maplocation.name == 'Комната3':
-            print('Вы перешли на север')
+            print('\n Вы перешли на север')
             maplocation = r0
     elif n == 'взять':
         if maplocation.orujie != 0:
@@ -367,5 +372,5 @@ maplocation = r0
 while True:
     n = input('Введите что нибудь: ')
     deystvie(n)
-    do_look()
+    #do_look()
     proverka_enimy()
