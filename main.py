@@ -1,7 +1,11 @@
 # Для начала импортируем рандомайзер
 from random import randint
+from pictures import pic_Start
+global agressive
+agressive = 0
 
-
+###Приветственный экран
+pic_Start()
 # Это класс Персонажа, так как версия игры сейчас однопользовательская
 # то экземпляр класса Игрока только один
 class Player:
@@ -272,7 +276,9 @@ def deystvie(n):
             fg = input('Введите название врага: ')
             if str(fg) == str(maplocation.vragy):
                 print (f'Вы напали на {maplocation.vragy}')
-                #maplocation.orujie = 0
+                global agressive
+                agressive = agressive + 1
+                
                 fight()
     elif n == 'ю':
         if maplocation.name == 'Комната':
@@ -325,7 +331,9 @@ def proverka_enimy():
     pass
 
 def fight():
-    while e.hp > 0:
+    global agressive
+    while agressive != 0:
+        
         print('Вы hp:',p.hp)
         print('Вы damage: ',p.damage)
         print("**********************")
@@ -346,9 +354,10 @@ def fight():
             print("*********************")
             if p.hp < 0:
                 print("Вы проиграли")
+                agressive = agressive - 1
             elif e.hp < 0:
                 print("Вы победили")
-
+                agressive = agressive - 1
 
         elif n == '2':
             # Рандомно от 0 до 5 добавляет хп.
@@ -361,6 +370,7 @@ def fight():
         else:
              print("Чего ждем?")
         print("******************")
+        print(agressive)
 ### Основной цикл
 start_menu()
 
@@ -369,6 +379,10 @@ global x
 x = 1
 global maplocation
 maplocation = r0
+
+global agressiv
+agressiv = False
+
 
 ############################## Основной игровой цикл  ###########################
 while True:

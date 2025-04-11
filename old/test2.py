@@ -248,3 +248,6 @@ maplocation = Room1()
 ### Основной цикл
 while True:
     Game()
+
+
+
