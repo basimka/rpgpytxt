@@ -10,11 +10,31 @@ pic_Start()
 # то экземпляр класса Игрока только один
 class Player:
     inventar = []
-    def __init__(self,hp,damage,mana,haco):
+    def __init__(self, hp, damage, mana, haco):
         self.hp = hp
         self.damage = damage
         self.mana = mana
         self.haco = haco
+    lvl = 1   
+    exp = 0
+    if exp >= 256000:
+        lvl = 10
+    elif exp >= 128000:
+        lvl = 9
+    elif exp >= 64000:
+        lvl = 8
+    elif exp >= 32000:
+        lvl = 7
+    elif exp >= 16000:
+        lvl = 6
+    elif exp >= 8000:
+        lvl = 5
+    elif exp >= 4000:
+        lvl = 4
+    elif exp >= 2000:
+        lvl = 3
+    elif exp >= 1000:
+        lvl = 2
     def __str__(self):
         pass
 
@@ -27,17 +47,18 @@ p = Player(100,10,0,20)
 
 #Экземпляр класса противника, во многом схож с игроком, но экземпляров класса будет куча
 class Enemy:
-    def __init__(self,name,hp,damage,mana,haco):
+    def __init__(self,name,hp,damage,mana,haco,exp):
         self.hp = hp
         self.damage = damage
         self.mana = mana
         self.name = name
         self.haco = haco
+        self.exp = exp
     def __str__(self):
         return str(self.name)
 
-e = Enemy('мышь',80,10,0,20)
-Rabbit = Enemy('кролик',100,15,0,20)
+e = Enemy('мышь',80,10,0,20,10)
+Rabbit = Enemy('кролик',100,15,0,20,20)
 
 ############################## Оружие ###########################
 class Weapon:
@@ -54,6 +75,7 @@ clows = Weapon('Когти',20,20)
 knife = Weapon('Нож',20,10)
 sword = Weapon('Меч',25,15)
 staff = Weapon('Посох',15,15)
+
 ####################### Комнаты ##################################
 class Room:
     name = 'Комната'
@@ -196,6 +218,7 @@ def do_look():
         print (f'Валяется {maplocation.orujie}')
     if maplocation.vragy != 0:
         print (f'В углу скалится {maplocation.vragy}')
+
 ######################### меню Инвентарь ###########################
 def menu_inventory():
     print ('Ваше золото = ' , inventar.golds)
@@ -212,6 +235,8 @@ def menu_stats():
     print (f'hp = {p.hp}')
     print (f'damage = {p.damage}')
     print (f'mana = {p.mana}')
+    print (f'exp = {p.exp}')
+    print (f'На вас надеты = {p.inventar}')
     input("Нажмите Enter для продолжения.")
 
 ########################## Меню Битва #########################
@@ -223,6 +248,7 @@ def menu_prefight():
 (3) Вызвать меню помощи
 (4) Выход из игры
 ''')
+    
 ########################## Основное меню #########################
 def start_menu():
     print (f'''
@@ -236,6 +262,7 @@ def start_menu():
 надеть - Надеть что-то из инвентаря
 напасть - Напасть на кого нибудь
 ''')
+    
 ############################ Меню Помощи #########################
 def menu_help():
     print('####################################')
@@ -269,6 +296,15 @@ def deystvie(n):
     elif n == 'надеть':
         print ('Что вы хотите надеть?')
         print (inv.things)
+        fg = input('Введите название предмета: ')
+        i = 0
+        while i < len(inv.things):
+            if str(fg) == str(inv.things[i]):
+                print (f'Вы надели {inv.things[i]}')
+                p.inventar.append(str(inv.things[i]))
+                del inv.things[i]
+            i+=1
+
     elif n == 'напасть':
         if maplocation.vragy != 0:
             print ('На кого вы хотите напасть? \n')
@@ -322,10 +358,8 @@ def deystvie(n):
                 print (f'Вы взяли {maplocation.orujie}')
                 inventar.things.append(str(maplocation.orujie))
                 maplocation.orujie = 0
-                
     else:
         print ('Ни чего не произошло')
-
 
 def proverka_enimy():
     pass
@@ -333,7 +367,6 @@ def proverka_enimy():
 def fight():
     global agressive
     while agressive != 0:
-        
         print('Вы hp:',p.hp)
         print('Вы damage: ',p.damage)
         print("**********************")
@@ -358,6 +391,8 @@ def fight():
             elif e.hp < 0:
                 print("Вы победили")
                 agressive = agressive - 1
+                p.exp = p.exp + maplocation.vragy.exp
+                maplocation.vragy = 0
 
         elif n == '2':
             # Рандомно от 0 до 5 добавляет хп.
@@ -382,7 +417,6 @@ maplocation = r0
 
 global agressiv
 agressiv = False
-
 
 ############################## Основной игровой цикл  ###########################
 while True:
