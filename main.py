@@ -10,6 +10,7 @@ pic_Start()
 # то экземпляр класса Игрока только один
 class Player:
     inventar = []
+    inventar_str = []
     def __init__(self, hp, damage, mana, haco):
         self.hp = hp
         self.damage = damage
@@ -205,6 +206,7 @@ r7 = Room7()
 class inventar():
     golds = 0
     things = []
+    str_things = []
     potions = []
     scrolls = []
     limit = 10
@@ -221,11 +223,11 @@ def do_look():
 
 ######################### меню Инвентарь ###########################
 def menu_inventory():
-    print ('Ваше золото = ' , inventar.golds)
-    print ('Ваши вещи = ' , inventar.things)
-    print ('Ваши свитки = ' , inventar.scrolls)
-    print ('Ваши бутылочки = ' , inventar.potions)
-    print ('Свобдных слотов =' , inventar.limit)
+    print ('Ваше золото = ' , inv.golds)
+    print ('Ваши вещи = ' , inv.str_things)
+    print ('Ваши свитки = ' , inv.scrolls)
+    print ('Ваши бутылочки = ' , inv.potions)
+    print ('Свобдных слотов =' , inv.limit)
     input("Нажмите Enter для продолжения.")
 
 ########################## Меню статистика #########################
@@ -236,7 +238,7 @@ def menu_stats():
     print (f'damage = {p.damage}')
     print (f'mana = {p.mana}')
     print (f'exp = {p.exp}')
-    print (f'На вас надеты = {p.inventar}')
+    print (f'На вас надеты = {p.inventar_str}')
     input("Нажмите Enter для продолжения.")
 
 ########################## Меню Битва #########################
@@ -295,14 +297,17 @@ def deystvie(n):
         quit()
     elif n == 'надеть':
         print ('Что вы хотите надеть?')
-        print (inv.things)
+        print (inv.str_things)
         fg = input('Введите название предмета: ')
         i = 0
         while i < len(inv.things):
             if str(fg) == str(inv.things[i]):
                 print (f'Вы надели {inv.things[i]}')
-                p.inventar.append(str(inv.things[i]))
+                p.inventar.append(inv.things[i]) 
+                p.inventar_str.append(str(inv.things[i]))
+                p.damage = p.damage + inv.things[i].damage
                 del inv.things[i]
+                del inv.str_things[i]
             i+=1
 
     elif n == 'напасть':
@@ -356,7 +361,8 @@ def deystvie(n):
             vz = input('Введите название предмета: ')
             if str(vz) == str(maplocation.orujie):
                 print (f'Вы взяли {maplocation.orujie}')
-                inventar.things.append(str(maplocation.orujie))
+                inv.things.append(maplocation.orujie)
+                inv.str_things.append(str(maplocation.orujie))
                 maplocation.orujie = 0
     else:
         print ('Ни чего не произошло')
