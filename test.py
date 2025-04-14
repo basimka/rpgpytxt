@@ -23,4 +23,3 @@ def unlock():
 
 while True:
     unlock()
-
