@@ -1,14 +1,15 @@
 # Для начала импортируем рандомайзер
 from random import randint
 
+class chest:
+    pass
+
 class door_lock:
     def __new__(cls,diff):
         open = randint(0,diff)
         return open
 
-    
-
-lockdr = door_lock(20)
+lockdr = door_lock(10)
 
 def unlock():   
     lk = input(f'Введите значение от 0 до 10: ')
@@ -19,6 +20,7 @@ def unlock():
     elif str(lk) == str(lockdr):
         print('Вам удалось открыть замок!!! \n')
         print(lockdr)
+
 while True:
     unlock()
 

@@ -1,6 +1,11 @@
 # Для начала импортируем рандомайзер
 from random import randint
+
+# Добавляем библиотеку с картинками
 from pictures import pic_Start
+
+#Объявление глобальной переменной агрессия
+#Если агрессия есть то значит и по шапке получить можно
 global agressive
 agressive = 0
 
@@ -76,6 +81,10 @@ clows = Weapon('Когти',20,20)
 knife = Weapon('Нож',20,10)
 sword = Weapon('Меч',25,15)
 staff = Weapon('Посох',15,15)
+
+####################### ЗамкИ ####################################
+
+
 
 ####################### Комнаты ##################################
 class Room:
@@ -318,9 +327,9 @@ def deystvie(n):
             if str(fg) == str(maplocation.vragy):
                 print (f'Вы напали на {maplocation.vragy}')
                 global agressive
-                agressive = agressive + 1
-                
+                agressive = agressive + 1               
                 fight()
+
     elif n == 'ю':
         if maplocation.name == 'Комната':
             print('\n Вы перешли на юг')
