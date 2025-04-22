@@ -419,14 +419,13 @@ def fight():
             #print('Ваши хп',p.hp)
         else:
              print("Чего ждем?")
-        print("******************")
-        print(agressive)
-### Основной цикл
+        
+### Основноe меню
 start_menu()
 
 ############################## Глобальные переменные ###########################
-global x
-x = 1
+#global x
+#x = 1
 global maplocation
 maplocation = r0
 
