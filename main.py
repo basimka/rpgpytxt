@@ -211,7 +211,6 @@ r6 = Room6()
 r7 = Room7()
 
 # Инвентарь. Было принято решение вынести инвентарь в отдельный класс.
-# Если всё пойдёт как надо то инвентарь из класса Player можно будет удалить
 class inventar():
     golds = 0
     things = []
@@ -403,6 +402,7 @@ def fight():
             if p.hp < 0:
                 print("Вы проиграли")
                 agressive = agressive - 1
+                quit()
             elif e.hp < 0:
                 print("Вы победили")
                 agressive = agressive - 1
