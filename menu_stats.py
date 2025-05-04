@@ -1,5 +1,5 @@
 ### Меню статистика
-from main import p
+from Locks import p
 def menu_stats():
     print('Статистика игрок')
     print('****************')
