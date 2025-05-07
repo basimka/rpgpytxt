@@ -1,4 +1,4 @@
-#Класс оружия:
+############################## Оружие ###########################
 class Weapon:
     def __init__(self,name,damage,stability):
         self.name = name
@@ -7,7 +7,7 @@ class Weapon:
 
     def __str__(self):
         return str(self.name)
-    
+
 woodstick = Weapon('Палка',10,5)
 clows = Weapon('Когти',20,20)
 knife = Weapon('Нож',20,10)

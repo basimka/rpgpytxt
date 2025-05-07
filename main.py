@@ -1,8 +1,8 @@
-# Для начала импортируем рандомайзер
 from random import randint
-
-# Добавляем библиотеку с картинками
-from pictures import pic_Start
+from media.pictures import pic_Start
+from data.player import *
+from data.enemys import *
+from data.weapons import *
 
 #Объявление глобальной переменной агрессия
 #Если агрессия есть то значит и по шапке получить можно
@@ -11,78 +11,7 @@ agressive = 0
 
 ###Приветственный экран
 pic_Start()
-# Это класс Персонажа, так как версия игры сейчас однопользовательская
-# то экземпляр класса Игрока только один
-class Player:
-    inventar = []
-    inventar_str = []
-    def __init__(self, hp, damage, mana, haco):
-        self.hp = hp
-        self.damage = damage
-        self.mana = mana
-        self.haco = haco
-    lvl = 1   
-    exp = 0
-    if exp >= 256000:
-        lvl = 10
-    elif exp >= 128000:
-        lvl = 9
-    elif exp >= 64000:
-        lvl = 8
-    elif exp >= 32000:
-        lvl = 7
-    elif exp >= 16000:
-        lvl = 6
-    elif exp >= 8000:
-        lvl = 5
-    elif exp >= 4000:
-        lvl = 4
-    elif exp >= 2000:
-        lvl = 3
-    elif exp >= 1000:
-        lvl = 2
-    def __str__(self):
-        pass
 
-#Так как экземпляр класса Игрока у нас должен быть доступен отовсюду,
-# то для начала мы делаем его глобальным, а потом уже создаем сам
-# экземпляр класса
-global p
-
-p = Player(100,10,0,20)
-
-#Экземпляр класса противника, во многом схож с игроком, но экземпляров класса будет куча
-class Enemy:
-    def __init__(self,name,hp,damage,mana,haco,exp):
-        self.hp = hp
-        self.damage = damage
-        self.mana = mana
-        self.name = name
-        self.haco = haco
-        self.exp = exp
-    def __str__(self):
-        return str(self.name)
-
-e = Enemy('мышь',80,10,0,20,10)
-Rabbit = Enemy('кролик',100,15,0,20,20)
-
-############################## Оружие ###########################
-class Weapon:
-    def __init__(self,name,damage,stability):
-        self.name = name
-        self.damage = damage
-        self.stability = stability
-
-    def __str__(self):
-        return str(self.name)
-
-woodstick = Weapon('Палка',10,5)
-clows = Weapon('Когти',20,20)
-knife = Weapon('Нож',20,10)
-sword = Weapon('Меч',25,15)
-staff = Weapon('Посох',15,15)
-
-####################### ЗамкИ ####################################
 
 
 

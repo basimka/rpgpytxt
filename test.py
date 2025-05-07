@@ -28,7 +28,7 @@
 from random import randint
 
 # Добавляем библиотеку с картинками
-from pictures import pic_Start
+from media.pictures import pic_Start
 
 #Объявление глобальной переменной агрессия
 #Если агрессия есть то значит и по шапке получить можно
