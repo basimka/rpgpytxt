@@ -3,7 +3,7 @@ from media.pictures import pic_Start
 from data.player import *
 from data.enemys import *
 from data.weapons import *
-
+#from data.menu_stats import *
 #Объявление глобальной переменной агрессия
 #Если агрессия есть то значит и по шапке получить можно
 global agressive
@@ -11,10 +11,6 @@ agressive = 0
 
 ###Приветственный экран
 pic_Start()
-
-
-
-
 ####################### Комнаты ##################################
 class Room:
     name = 'Комната'
@@ -77,7 +73,7 @@ class Room4:
 ###################\n'+'\
 Выходы есть только:\n'+f'\
 {vihody}\n')
-    
+
 class Room5:
     name = 'Комната5'
     vihody = ['в','ю']
@@ -90,7 +86,7 @@ class Room5:
 ###################\n'+'\
 Выходы есть только:\n'+f'\
 {vihody}\n')
-    
+
 class Room6:
     name = 'Комната6'
     vihody = ['с','з']
@@ -103,7 +99,7 @@ class Room6:
 ###################\n'+'\
 Выходы есть только:\n'+f'\
 {vihody}\n')
-    
+
 class Room7:
     name = 'Комната7'
     vihody = ['в','з','с']
@@ -116,7 +112,7 @@ class Room7:
 ###################\n'+'\
 Выходы есть только:\n'+f'\
 {vihody}\n')
-    
+
 class Room8:
     name = 'Комната8'
     vihody = ['в','с']
