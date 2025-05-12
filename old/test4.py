@@ -1,4 +1,7 @@
 from random import randint
+from data.rooms import *
+from data.weapons import *
+from data.enemys import *
 
 class Lock:
     def __init__(self,diff):
@@ -24,6 +27,7 @@ class Chest:
     
 zamok = Lock(10)
 
+r0 = Room('Комната', ['ю','з'], [sword], [Mouse])
+
 while True:
     zamok.unlock()
-
