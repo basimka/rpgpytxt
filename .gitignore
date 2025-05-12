@@ -1,2 +1,5 @@
 # Ignore 
-__pycache__/ test.py test2.py test3.py
+__pycache__/ 
+old/
+media/__pycache__/
+data/__pycache__/
